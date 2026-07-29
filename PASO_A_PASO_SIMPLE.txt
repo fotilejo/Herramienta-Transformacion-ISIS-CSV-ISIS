@@ -1,0 +1,68 @@
+PASO A PASO SIMPLE
+===================
+
+1. Ejecuto REPARADOR_CAT.bat.
+
+2. Selecciono "1. Preparar una correccion nueva (exportar de ISIS a Excel)". Sin
+   preguntar nada mas, exporta la base CAT real completa (todas las columnas).
+
+3. Se generan unos Excel. Al que dice "editable" le hago los cambios que quiera, de la
+   forma que mejor me convenga. Guardo y cierro. Cierro todo si quiero -- retomo cuando
+   este listo, no hace falta hacerlo de una sentada.
+
+4. Cuando termino de editar, vuelvo a abrir REPARADOR_CAT.bat y selecciono
+   "2. Ya edite el Excel -> generar los cambios". Se arma el ISO con los cambios. Reviso
+   el informe.
+
+5. Selecciono "3. Aplicar los cambios a la base" -> opcion "3. Otra" -> pego la ruta del
+   CLON (por ejemplo C:\Isis\catprueba\catprueba). Tiene que decir LISTO.
+
+6. (Opcional) Reviso el resultado en la pantalla de ABCD, copiando los archivos del clon
+   al servidor y reconstruyendo su indice.
+
+7. Si el clon quedo bien, repito el paso 5, pero eligiendo esta vez la opcion
+   "1. La copia local de CAT", para aplicarlo a CAT real. Tiene que decir LISTO.
+
+8. Copio cat.mst y cat.xrf (ya modificados) al servidor de ABCD, reemplazando los que
+   estan ahi.
+
+9. Reconstruyo el indice de CAT en ABCD.
+
+10. Cambios aplicados. Retomo la catalogacion.
+
+
+EXPORTAR OTRA BASE (EL CLON, UNA CARPETA DE PRUEBA)
+-----------------------------------------------------
+El paso 2 solo exporta la base CAT real -- es lo que se usa siempre para preparar una
+correccion. Si alguna vez hace falta exportar OTRA base (por ejemplo para revisar el
+clon despues de aplicarle cambios), se hace desde la linea de comandos, no desde el
+menu:
+
+    python reparador.py --base "C:\Isis\catprueba\catprueba"
+
+Y ahi si, opcion 1 del menu exporta esa ruta en vez de CAT real.
+
+
+POR QUE EL PASO 5 VA PRIMERO AL CLON Y NO DIRECTO A CAT REAL
+--------------------------------------------------------------
+No es obligatorio -- el mecanismo (paso 7) ya esta probado y no rompe nada. Pero probar
+antes en el clon (paso 5-6) permite detectar un error de tipeo o un cambio mal hecho en
+el Excel antes de que llegue a la base real. Cuanto mas grande el lote de cambios, mas
+vale la pena. Para una correccion chica se puede saltear e ir directo al paso 7.
+
+
+ANTES DE UN LOTE GRANDE: REFRESCAR EL CLON
+--------------------------------------------
+Si paso tiempo desde la ultima vez que se uso el clon (se siguio catalogando en ABCD
+mientras tanto), conviene recrearlo primero: copiar cat.mst/cat.xrf reales sobre los del
+clon en el servidor, reconstruir su indice, y traer esos dos archivos frescos a la
+carpeta local del clon. Si el clon es reciente, se puede saltear.
+
+
+IMPORTANTE
+-----------
+- No se toca cat real hasta el paso 7.
+- Si en el informe del paso 4 aparece v401_no_declarado o v110_no_declarado en algun
+  registro que si edite por otro campo, no es una alarma: es un efecto de sistema ya
+  conocido y documentado en PROCEDIMIENTO.md (seccion 2), sin impacto en la catalogacion.
+- Este archivo es la version corta. El detalle completo esta en PROCEDIMIENTO.md.

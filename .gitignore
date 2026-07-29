@@ -1,0 +1,19 @@
+# Datos generados por la herramienta -- no van al repo (pesados y/o con
+# contenido real del catalogo, no son parte del codigo).
+Salidas_CSV/
+Salidas_ISO/
+Respaldos/
+Prueba/
+temp/
+
+# Registro acumulado de corridas locales.
+log_aplicar_cambios.txt
+
+# Python
+__pycache__/
+*.pyc
+
+# Archivos de ISIS (.mst/.xrf/.fdt, etc.) por si algun dia se copian sueltos
+# a esta carpeta -- nunca deberian ir al repo.
+*.mst
+*.xrf
