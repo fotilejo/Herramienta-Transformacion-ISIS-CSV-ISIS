@@ -86,7 +86,16 @@ def leer_informe(ruta):
             elif linea.startswith("   ") and not linea.startswith("      "):
                 col = linea.strip()
             elif linea.strip().startswith("ahora :") and mfn and col:
-                valor = linea.split("ahora :", 1)[1].strip()
+                # OJO: no usar .strip() aca. El formato es "      ahora : <valor>\n"
+                # (un espacio despues de los dos puntos, generado por generar_iso.py).
+                # Si el valor real termina en un espacio -- que puede ser dato
+                # legitimo, no un error -- un .strip() lo comeria y compararia mal
+                # contra el CSV reexportado (falso positivo de "no quedo como se
+                # esperaba"). Se saca solo el espacio del formato y el salto de linea.
+                valor = linea.split("ahora :", 1)[1]
+                if valor.startswith(" "):
+                    valor = valor[1:]
+                valor = valor.rstrip("\n").rstrip("\r")
                 if valor == "(vacio)":
                     valor = ""
                 esperado[(mfn, col)] = valor

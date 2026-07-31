@@ -1,6 +1,6 @@
 # Datos generados por la herramienta -- no van al repo (pesados y/o con
 # contenido real del catalogo, no son parte del codigo).
-Salidas_CSV/
+# Salidas_CSV/
 Salidas_ISO/
 Respaldos/
 Prueba/
@@ -17,3 +17,4 @@ __pycache__/
 # a esta carpeta -- nunca deberian ir al repo.
 *.mst
 *.xrf
+*.iso
